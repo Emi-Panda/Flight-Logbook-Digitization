@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
  
 const Record = (props) => (
  <tr>
-   <td>{props.record.name}</td>
-   <td>{props.record.position}</td>
-   <td>{props.record.level}</td>
+   <td>{props.record.date}</td>
+   <td>{props.record.from}</td>
+   <td>{props.record.to}</td>
    <td>
      <Link className="btn btn-link" to={`/edit/${props.record._id}`}>Edit</Link> |
      <button className="btn btn-link"
@@ -24,7 +24,7 @@ export default function RecordList() {
  
  useEffect(() => {
    async function getRecords() {
-     const response = await fetch(`http://localhost:4000/record/`);
+     const response = await fetch(`http://localhost:4000/entries/`);
  
      if (!response.ok) {
        const message = `An error occurred: ${response.statusText}`;
