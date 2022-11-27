@@ -5,7 +5,7 @@ const dbo = require("../db/conn");
  
 const ObjectId = require("mongodb").ObjectId;
  
- 
+/*get all records*/
 recordRoutes.route("/entries").get(function (req, res) {
  let db_connect = dbo.getDb("LOGBOOK");
  db_connect
@@ -16,7 +16,8 @@ recordRoutes.route("/entries").get(function (req, res) {
      res.json(result);
    });
 });
- 
+
+/*single record from ID*/
 recordRoutes.route("/entries/:id").get(function (req, res) {
  let db_connect = dbo.getDb();
  let myquery = { _id: ObjectId(req.params.id) };
@@ -28,12 +29,30 @@ recordRoutes.route("/entries/:id").get(function (req, res) {
    });
 });
  
+/*add record to database*/
 recordRoutes.route("/entries/add").post(function (req, response) {
  let db_connect = dbo.getDb();
- let myobj = {
-   date: req.body.date,
-   position: req.body.position,
-   level: req.body.level,
+ let myobj = {  
+    date: req.body.date,
+    aircraft_type: req.body.aircraft_type,
+    aircraft_id: req.body.aircraft_id,
+    from: req.body.from,
+    to: req.body.to,
+    flight_duration: req.body.flight_duration,
+    pic: req.body.pic,
+    sic: req.body.sic,
+    flight_training: req.body.flight_training,
+    group_training: req.body.group_training,
+    SIMULATOR_FTD_OR_ATD: req.body.SIMULATOR_FTD_OR_ATD,
+    cross_country: req.body.cross_country,
+    day_night: req.body.day_night,
+    actual_instrument: req.body.actual_instrument,
+    simulated_instrument: req.body.simulated_instrument,
+    landing_day: req.body.landing_day,
+    landing_night: req.body.landing_night,
+    single_landing: req.body.single_landing,
+    multi_landing: req.body.multi_landing,
+    notes: req.body.notes,
  };
  db_connect.collection("entries").insertOne(myobj, function (err, res) {
    if (err) throw err;
@@ -41,15 +60,32 @@ recordRoutes.route("/entries/add").post(function (req, response) {
  });
 });
  
-// This section will help you update a record by id.
+/*update record*/
 recordRoutes.route("/update/:id").post(function (req, response) {
  let db_connect = dbo.getDb();
  let myquery = { _id: ObjectId(req.params.id) };
  let newvalues = {
    $set: {
-     name: req.body.name,
-     position: req.body.position,
-     level: req.body.level,
+    date: req.body.date,
+    aircraft_type: req.body.aircraft_type,
+    aircraft_id: req.body.aircraft_id,
+    from: req.body.from,
+    to: req.body.to,
+    flight_duration: req.body.flight_duration,
+    pic: req.body.pic,
+    sic: req.body.sic,
+    flight_training: req.body.flight_training,
+    group_training: req.body.group_training,
+    SIMULATOR_FTD_OR_ATD: req.body.SIMULATOR_FTD_OR_ATD,
+    cross_country: req.body.cross_country,
+    day_night: req.body.day_night,
+    actual_instrument: req.body.actual_instrument,
+    simulated_instrument: req.body.simulated_instrument,
+    landing_day: req.body.landing_day,
+    landing_night: req.body.landing_night,
+    single_landing: req.body.single_landing,
+    multi_landing: req.body.multi_landing,
+    notes: req.body.notes,
    },
  };
  db_connect
@@ -61,6 +97,7 @@ recordRoutes.route("/update/:id").post(function (req, response) {
    });
 });
  
+/*delete single record*/
 recordRoutes.route("/:id").delete((req, response) => {
  let db_connect = dbo.getDb();
  let myquery = { _id: ObjectId(req.params.id) };

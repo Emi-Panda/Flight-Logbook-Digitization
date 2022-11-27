@@ -3,10 +3,27 @@ import { useParams, useNavigate } from "react-router";
  
 export default function Edit() {
  const [form, setForm] = useState({
-   name: "",
-   position: "",
-   level: "",
-   records: [],
+  date: "",
+  aircraft_type: "",
+  aircraft_id: "",
+  from: "",
+  to: "",
+  flight_duration: "",
+  pic: "",
+  sic: "",
+  flight_training: "",
+  group_training: "",
+  SIMULATOR_FTD_OR_ATD: "",
+  cross_country: "",
+  day_night: "",
+  actual_instrument: "",
+  simulated_instrument: "",
+  landing_day: "",
+  landing_night: "",
+  single_landing: "",
+  multi_landing: "",
+  notes: "",
+  records: [],
  });
  const params = useParams();
  const navigate = useNavigate();
@@ -14,7 +31,7 @@ export default function Edit() {
  useEffect(() => {
    async function fetchData() {
      const id = params.id.toString();
-     const response = await fetch(`http://localhost:4000/record/${params.id.toString()}`);
+     const response = await fetch(`http://localhost:4000/entries/${params.id.toString()}`);
  
      if (!response.ok) {
        const message = `An error has occurred: ${response.statusText}`;
@@ -46,11 +63,28 @@ export default function Edit() {
  async function onSubmit(e) {
    e.preventDefault();
    const editedPerson = {
-     name: form.name,
-     position: form.position,
-     level: form.level,
+    date: form.date,
+    aircraft_type: form.aircraft_type,
+    aircraft_id: form.aircraft_id,
+    from: form.from,
+    to: form.to,
+    flight_duration: form.flight_duration,
+    pic: form.pic,
+    sic: form.sic,
+    flight_training: form.flight_training,
+    group_training: form.group_training,
+    SIMULATOR_FTD_OR_ATD: form.SIMULATOR_FTD_OR_ATD,
+    cross_country: form.cross_country,
+    day_night: form.day_night,
+    actual_instrument: form.actual_instrument,
+    simulated_instrument: form.simulated_instrument,
+    landing_day: form.landing_day,
+    landing_night: form.landing_night,
+    single_landing: form.single_landing,
+    multi_landing: form.multi_landing,
+    notes: form.notes,
    };
- 
+   /*call update function*/
    await fetch(`http://localhost:4000/update/${params.id}`, {
      method: "POST",
      body: JSON.stringify(editedPerson),
@@ -58,74 +92,129 @@ export default function Edit() {
        'Content-Type': 'application/json'
      },
    });
- 
+   
    navigate("/");
  }
- 
- return (
+/*returned output ui*/
+ return ( 
    <div>
      <h3>Update Record</h3>
      <form onSubmit={onSubmit}>
-       <div className="form-group">
-         <label htmlFor="name">Name: </label>
-         <input
-           type="text"
-           className="form-control"
-           id="name"
-           value={form.name}
-           onChange={(e) => updateForm({ name: e.target.value })}
-         />
-       </div>
-       <div className="form-group">
-         <label htmlFor="position">Position: </label>
-         <input
-           type="text"
-           className="form-control"
-           id="position"
-           value={form.position}
-           onChange={(e) => updateForm({ position: e.target.value })}
-         />
-       </div>
-       <div className="form-group">
-         <div className="form-check form-check-inline">
-           <input
-             className="form-check-input"
-             type="radio"
-             name="positionOptions"
-             id="positionIntern"
-             value="Intern"
-             checked={form.level === "Intern"}
-             onChange={(e) => updateForm({ level: e.target.value })}
-           />
-           <label htmlFor="positionIntern" className="form-check-label">Intern</label>
-         </div>
-         <div className="form-check form-check-inline">
-           <input
-             className="form-check-input"
-             type="radio"
-             name="positionOptions"
-             id="positionJunior"
-             value="Junior"
-             checked={form.level === "Junior"}
-             onChange={(e) => updateForm({ level: e.target.value })}
-           />
-           <label htmlFor="positionJunior" className="form-check-label">Junior</label>
-         </div>
-         <div className="form-check form-check-inline">
-           <input
-             className="form-check-input"
-             type="radio"
-             name="positionOptions"
-             id="positionSenior"
-             value="Senior"
-             checked={form.level === "Senior"}
-             onChange={(e) => updateForm({ level: e.target.value })}
-           />
-           <label htmlFor="positionSenior" className="form-check-label">Senior</label>
-       </div>
-       </div>
-       <br />
- 
+       {/*Location/time*/}
+      <div className="form-group"> 
+        <div className="form-check form-check-inline">
+          {/* Date */}
+          <label htmlFor="date">Date:</label>
+          <input
+            type="text"
+            className="form-control"
+            id="date"
+            value={form.date}
+            onChange={(e) => updateForm({ date: e.target.value })}/>
+          {/* From / To */}
+          <label htmlFor="from">From:</label>
+          <input
+            type="text"
+            className="form-control"
+            id="from"
+            value={form.from}
+            onChange={(e) => updateForm({ from: e.target.value })}/>
+          <label htmlFor="to">To:</label>
+          <input
+            type="text"
+            className="form-control"
+            id="to"
+            value={form.to}
+            onChange={(e) => updateForm({ to: e.target.value })}/>
+          {/* Durration of Flight */}
+          <label htmlFor="flight-durration">Flight Durration:</label>
+          <input
+            type="text"
+            className="form-control"
+            id="flight-durration"
+            value={form.flight_duration}
+            onChange={(e) => updateForm({ flight_duration: e.target.value })}/>
+          {/* Landings */}
+          <label htmlFor="day_landing">Day Landings:</label>
+          <input
+            type="text"
+            className="form-control"
+            id="day"
+            value={form.landing_day}
+            onChange={(e) => updateForm({ landing_day: e.target.value })}/>
+          <label htmlFor="night_landing">Night Landings:</label>
+          <input
+            type="text"
+            className="form-control"
+            id="landing_night"
+            value={form.landing_night}
+            onChange={(e) => updateForm({ landing_night: e.target.value })}/>
+            {/*end*/}
+        </div>
+      </div>
+
+      {/* -----------------------------------------------------*/}
+
+      <br/><br/><br/>
+      {/*Pilot Info*/}
+      <div className="form-group"> 
+        <div className="form-check form-check-inline">
+          {/* PIC */}
+          <label htmlFor="to">PIC:</label>
+          <input
+            type="text"
+            className="form-control"
+            id="pic"
+            value={form.pic}
+            onChange={(e) => updateForm({ pic: e.target.value })}/>
+          {/*SIC*/}
+          <label htmlFor="to">SIC:</label>
+          <input
+            type="text"
+            className="form-control"
+            id="sic"
+            value={form.sic}
+            onChange={(e) => updateForm({ sic: e.target.value })}/>
+        </div>
+      </div>
+
+      {/* -----------------------------------------------------*/}
+
+      <br/><br/><br/>
+      {/*Plane Info*/}
+      <div className="form-group"> 
+        {/* Aircraft Type */}
+        <div className="form-check form-check-inline">
+          <label htmlFor="aircraft-type">Aircraft Type:</label>
+          <input
+            type="text"
+            className="form-control"
+            id="aircraft-type"
+            value={form.aircraft_type}
+            onChange={(e) => updateForm({ aircraft_type: e.target.value })}/>
+          {/* Aircraft Ident */}
+          <label htmlFor="aircraft-id">Aircraft Id:</label>
+          <input
+            type="text"
+            className="form-control"
+            id="aircraft-id"
+            value={form.aircraft_id}
+            onChange={(e) => updateForm({ aircraft_id: e.target.value })}/>
+        </div>
+      </div>
+      <br/><br/>
+      {/*Notes*/}
+      <div className="form-group"> 
+        <label htmlFor="notes">Notes:</label>
+            <input
+              type="text"
+              className="form-control"
+              id="notes"
+              value={form.notes}
+              onChange={(e) => updateForm({ notes: e.target.value })}/>
+      </div>
+      {/*Update record button*/}
+      <br/><br/>
        <div className="form-group">
          <input
            type="submit"

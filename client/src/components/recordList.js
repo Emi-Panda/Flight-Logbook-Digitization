@@ -3,18 +3,24 @@ import { Link } from "react-router-dom";
  
 const Record = (props) => (
  <tr>
+  {/*get record info*/}
+   <td>{props.record.pic}</td>
+   <td>{props.record.sic}</td>
+   <td>{props.record.flight_duration}</td>
    <td>{props.record.date}</td>
    <td>{props.record.from}</td>
    <td>{props.record.to}</td>
-   <td>
+   <td>{props.record.aircraft_id}</td>
+   <td> {/*edit/delete/viewfullrecord */}
      <Link className="btn btn-link" to={`/edit/${props.record._id}`}>Edit</Link> |
      <button className="btn btn-link"
        onClick={() => {
          props.deleteRecord(props.record._id);
-       }}
-     >
+       }}>
        Delete
-     </button>
+     </button> | 
+     <Link className="btn btn-link" to={`/view/${props.record._id}`}>View</Link> 
+
    </td>
  </tr>
 );
@@ -40,7 +46,8 @@ export default function RecordList() {
  
    return;
  }, [records.length]);
- 
+
+ {/*if delete button is clicked*/}
  async function deleteRecord(id) {
    await fetch(`http://localhost:4000/${id}`, {
      method: "DELETE"
@@ -61,17 +68,21 @@ export default function RecordList() {
      );
    });
  }
- 
+ {/*returned output ui*/}
  return (
    <div>
      <h3>Record List</h3>
      <table className="table table-striped" style={{ marginTop: 20 }}>
        <thead>
          <tr>
+           <th>PIC</th>
+           <th>SIC</th>
+           <th>Flight Duration</th>
            <th>Date</th>
            <th>To</th>
            <th>From</th>
-           <th>Flight Duration</th>
+           <th>Aircraft ID</th>
+           <th>Settings</th>
          </tr>
        </thead>
        <tbody>{recordList()}</tbody>

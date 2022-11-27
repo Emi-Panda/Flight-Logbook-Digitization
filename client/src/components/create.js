@@ -64,8 +64,6 @@ export default function Create() {
     <h3>Create New Record</h3>
     <br></br>
     <form onSubmit={onSubmit}>
-
-
       {/*Location/time*/}
       <div className="form-group"> 
         <div className="form-check form-check-inline">
@@ -168,26 +166,6 @@ export default function Create() {
             onChange={(e) => updateForm({ aircraft_id: e.target.value })}/>
         </div>
       </div>
-
-
-
-
-
-
-
-
-
-
-      {/*xxx*/}
-      <div className="form-group"> 
-
-      </div>
-
-      {/*xxx*/}
-      <div className="form-group"> 
-
-      </div>
-
       <br/><br/>
       {/*Notes*/}
       <div className="form-group"> 
@@ -200,8 +178,9 @@ export default function Create() {
               onChange={(e) => updateForm({ notes: e.target.value })}/>
       </div>
 
-      
+
     <br/><br/>
+    {/*Upload record button*/}
     <div className="form-group">
          <input
            type="submit"
