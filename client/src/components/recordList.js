@@ -8,8 +8,8 @@ const Record = (props) => (
    <td>{props.record.sic}</td>
    <td>{props.record.flight_duration}</td>
    <td>{props.record.date}</td>
-   <td>{props.record.from}</td>
    <td>{props.record.to}</td>
+   <td>{props.record.from}</td>
    <td>{props.record.aircraft_id}</td>
    <td> {/*edit/delete/viewfullrecord */}
      <Link className="btn btn-link" to={`/edit/${props.record._id}`}>Edit</Link> |
