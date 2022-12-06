@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
+import AIRPORTSLIST from "./AIRPORT LIST.json"
+let AIRPORTS = AIRPORTSLIST.AIRPORTS;
  
 export default function Create() {
  const [form, setForm] = useState({
@@ -70,30 +72,38 @@ export default function Create() {
           {/* Date */}
           <label htmlFor="date">Date:</label>
           <input
-            type="text"
+            type="date"
             className="form-control"
             id="date"
             value={form.date}
             onChange={(e) => updateForm({ date: e.target.value })}/>
           {/* From / To */}
           <label htmlFor="from">From:</label>
-          <input
+          <select
             type="text"
             className="form-control"
             id="from"
             value={form.from}
-            onChange={(e) => updateForm({ from: e.target.value })}/>
+            onChange={(e) => updateForm({ from: e.target.value })}>
+              <option value = "">Select...</option>
+              {AIRPORTS.map((x) => <option value={x}>{x}</option>)}
+            </select>
           <label htmlFor="to">To:</label>
-          <input
+          <select
             type="text"
             className="form-control"
             id="to"
             value={form.to}
-            onChange={(e) => updateForm({ to: e.target.value })}/>
+            onChange={(e) => updateForm({ to: e.target.value })}>
+              <option value = "">Select...</option>
+              {AIRPORTS.map((x) => <option value={x}>{x}</option>)}
+            </select>
           {/* Durration of Flight */}
-          <label htmlFor="flight-durration">Flight Durration:</label>
+          <label htmlFor="flight-durration">Flight Durration (Minutes):</label>
           <input
-            type="text"
+            type="number"
+            max="24"
+            min="0"
             className="form-control"
             id="flight-durration"
             value={form.flight_duration}
@@ -101,14 +111,14 @@ export default function Create() {
           {/* Landings */}
           <label htmlFor="day_landing">Day Landings:</label>
           <input
-            type="text"
+            type="number"
             className="form-control"
             id="day"
             value={form.landing_day}
             onChange={(e) => updateForm({ landing_day: e.target.value })}/>
           <label htmlFor="night_landing">Night Landings:</label>
           <input
-            type="text"
+            type="number"
             className="form-control"
             id="landing_night"
             value={form.landing_night}

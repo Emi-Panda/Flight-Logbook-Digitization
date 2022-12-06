@@ -1,8 +1,8 @@
 import React from "react";
- import "bootstrap/dist/css/bootstrap.css";
+ //import "bootstrap/dist/css/bootstrap.css";
  import { NavLink } from "react-router-dom";
  
-{/*returned output ui*/}
+/*returned output ui*/
 export default function Navbar() {
  return ( 
    <div>

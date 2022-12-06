@@ -47,7 +47,7 @@ export default function RecordList() {
    return;
  }, [records.length]);
 
- {/*if delete button is clicked*/}
+ /*if delete button is clicked*/
  async function deleteRecord(id) {
    await fetch(`http://localhost:4000/${id}`, {
      method: "DELETE"
@@ -68,7 +68,7 @@ export default function RecordList() {
      );
    });
  }
- {/*returned output ui*/}
+ /*returned output ui*/
  return (
    <div>
      <h3>Record List</h3>
