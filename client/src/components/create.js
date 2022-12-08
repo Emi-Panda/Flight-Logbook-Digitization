@@ -101,7 +101,8 @@ export default function Create() {
           {/* Durration of Flight */}
           <label htmlFor="flight-durration">Flight Durration (Minutes):</label>
           <input
-            type="number"
+            type="double"
+            placeholder= "0.0"
             max="24"
             min="0"
             className="form-control"
@@ -112,6 +113,7 @@ export default function Create() {
           <label htmlFor="day_landing">Day Landings:</label>
           <input
             type="number"
+            placeholder= "0"
             className="form-control"
             id="day"
             value={form.landing_day}
@@ -119,6 +121,7 @@ export default function Create() {
           <label htmlFor="night_landing">Night Landings:</label>
           <input
             type="number"
+            placeholder= "0"
             className="form-control"
             id="landing_night"
             value={form.landing_night}

@@ -1,11 +1,8 @@
 import React from "react";
-import "./CSS/App.css"
-
- 
-// We use Route in order to define the different routes of our application
+import "./CSS/App.css" //css
 import { Route, Routes } from "react-router-dom";
  
-// We import all the components we need in our app
+//Import components
 import Navbar from "./components/navbar";
 import RecordList from "./components/recordList";
 import Edit from "./components/edit";
@@ -15,7 +12,8 @@ import LoginPage from "./components/login";
  
 const App = () => {
  return (
-   <div>
+  <div>
+    <title>FLB</title>
      <Navbar />
      <Routes>
        <Route exact path="/" element={<RecordList />} />
@@ -24,7 +22,7 @@ const App = () => {
        <Route path="/view/:id" element={<ViewRecord />} />
        <Route path="/login" element={<LoginPage />} />
      </Routes>
-   </div>
+  </div>
  );
 };
  

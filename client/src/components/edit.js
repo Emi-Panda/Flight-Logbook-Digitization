@@ -137,7 +137,7 @@ export default function Edit() {
           {/* Durration of Flight */}
           <label htmlFor="flight-durration">Flight Durration (Minutes):</label>
           <input
-            type="number"
+            type="double"
             className="form-control"
             id="flight-durration"
             value={form.flight_duration}

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
+import { Link } from "react-router-dom";
+import "../CSS/viewRecord.css"
  
 export default function Edit() {
  const [form, setForm] = useState({
@@ -52,13 +54,18 @@ export default function Edit() {
  
    return;
  }, [params.id, navigate]);
- 
+/*delete */
+async function deleteRecord(id) {
+  await fetch(`http://localhost:4000/${id}`, {
+    method: "DELETE"
+  });
+} 
 /* check if exits*/
 function exists(field){
  if (field === ""){
-    return "N/A"
+    return <u>N/A</u>;
  } else {
-    return field
+    return <u>{field}</u>;
  }
 }
 /*returned output ui*/
@@ -68,54 +75,56 @@ function exists(field){
     <br/>
     <table>
         <tr>
-            <td>Date: {exists(form.date)}</td>
+            <td><b>Date:</b> {exists(form.date)}</td>
+            <td><b>To:</b> {exists(form.to)}</td>
+            <td><b>From:</b> {exists(form.from)}</td>
+            <td><b>Duration:</b> {exists(form.flight_duration) + ' Minutes'}</td>
         </tr>
-        <br/>
+        {/*break*/}
+             
         <tr>
-            <td>To: {exists(form.to)}</td>
-            <td>From: {exists(form.from)}</td>
-            <td>Duration: {exists(form.flight_duration)}</td>
+            <td><b>PIC: </b>{exists(form.pic)}</td>
+            <td><b>SIC: </b>{exists(form.sic)}</td>
+            <td><b>Aircraft ID: </b>{exists(form.aircraft_id)}</td>
+            <td><b>Aircraft Type: </b>{exists(form.aircraft_type)}</td>
         </tr>
-        <br/>
+        {/*break*/}
+        
         <tr>
-            <td>Pilot In Command: {exists(form.pic)}</td>
-            <td>Second In Command: {exists(form.sic)}</td>
+            <td><b>Flight Training: </b>{exists(form.flight_training)}</td>
+            <td><b>Group Training: </b>{exists(form.group_training)}</td>
+            <td><b>Cross Country: </b>{exists(form.cross_country)}</td>
+            <td><b>Day or Night: </b>{exists(form.day_night)}</td>
         </tr>
-        <br/>
+        {/*break*/}
+             
         <tr>
-            <td>Aircraft ID: {exists(form.aircraft_id)}</td>
-            <td>Aircraft Type: {exists(form.aircraft_type)}</td>
+            <td><b>Day Landings: </b>{exists(form.landing_day)}</td>
+            <td><b>Night Landings: </b>{exists(form.landing_night)}</td>
+            <td><b>Single-engine Landing: </b>{exists(form.single_landing)}</td>
+            <td><b>Multi-engine Landing: </b>{exists(form.multi_landing)}</td>
         </tr>
-        <br/>
+        {/*break*/}
         <tr>
-            <td>Flight Training: {exists(form.flight_training)}</td>
-            <td>Group Training: {exists(form.group_training)}</td>
-            <td>Cross Country: {exists(form.cross_country)}</td>
-            <td>Day or Night: {exists(form.day_night)}</td>
-        </tr>
-        <br/>
-        <tr>
-            <td>Actual Instrument: {exists(form.actual_instrument)}</td>
-            <td>Simulated Instrument: {exists(form.simulated_instrument)}</td>
-        </tr>
-        <br/>
-
-        <tr>
-            <td>Day Landings: {exists(form.landing_day)}</td>
-            <td>Night Landings: {exists(form.landing_night)}</td>
-            <td>Single-engine Landing: {exists(form.single_landing)}</td>
-            <td>Multi-engine Landing: {exists(form.multi_landing)}</td>
-        </tr>
-        <br/>
-        <tr>
-            <td>Notes: {form.notes}</td>
+            <td><b>Actual Instrument: </b>{exists(form.actual_instrument)}</td>
+            <td><b>Simulated Intrument: </b>{exists(form.simulated_instrument)}</td>
         </tr>
     </table>
-     
-
-  {/*
-  SIMULATOR_FTD_OR_ATD: ""*/}
-     
+    <table>
+        <tr>
+          <th>Notes</th>
+        </tr>
+        <tr>
+            <td>{exists(form.notes)}</td>
+        </tr>
+    </table>
+    <div className="buttons-container">
+      <Link className="edit-button" to={`/edit/${params.id.toString()}`}> Edit </Link>
+      <Link className="delete-button"
+        onClick={() => {
+          deleteRecord(params.id);
+        }} to={`/`}>Delete</Link>
+    </div>
    </div>
  );
 }
