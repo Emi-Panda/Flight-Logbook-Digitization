@@ -78,7 +78,7 @@ function exists(field){
             <td><b>Date:</b> {exists(form.date)}</td>
             <td><b>To:</b> {exists(form.to)}</td>
             <td><b>From:</b> {exists(form.from)}</td>
-            <td><b>Duration:</b> {exists(form.flight_duration) + ' Minutes'}</td>
+            <td><b>Duration:</b> {exists(form.flight_duration)}<u> Minutes</u></td>
         </tr>
         {/*break*/}
              
