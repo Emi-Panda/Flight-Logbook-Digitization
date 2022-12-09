@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import "../CSS/recordList.css";
  
 const Record = (props) => (
  <tr>
   {/*get record info*/}
    <td>{props.record.pic}</td>
    <td>{props.record.sic}</td>
-   <td>{props.record.flight_duration}</td>
+   <td>{props.record.flight_duration} Minutes</td>
    <td>{props.record.date}</td>
    <td>{props.record.to}</td>
    <td>{props.record.from}</td>

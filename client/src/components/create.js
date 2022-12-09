@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import AIRPORTSLIST from "./AIRPORT LIST.json"
+import "../CSS/createEditRecord.css"
 let AIRPORTS = AIRPORTSLIST.AIRPORTS;
  
 export default function Create() {
@@ -66,10 +67,11 @@ export default function Create() {
     <h3>Create New Record</h3>
     <br></br>
     <form onSubmit={onSubmit}>
+    <table>
+      <tr>
       {/*Location/time*/}
-      <div className="form-group"> 
-        <div className="form-check form-check-inline">
           {/* Date */}
+        <td>
           <label htmlFor="date">Date:</label>
           <input
             type="date"
@@ -77,7 +79,21 @@ export default function Create() {
             id="date"
             value={form.date}
             onChange={(e) => updateForm({ date: e.target.value })}/>
+        </td>
+        {/* Durration of Flight */}
+        <td><label htmlFor="flight-durration">Flight Durration (Minutes):</label>
+          <input
+            type="double"
+            placeholder= "0.0"
+            max="24"
+            min="0"
+            className="form-control"
+            id="flight-durration"
+            value={form.flight_duration}
+            onChange={(e) => updateForm({ flight_duration: e.target.value })}/>
+          </td>
           {/* From / To */}
+        <td>
           <label htmlFor="from">From:</label>
           <select
             type="text"
@@ -88,6 +104,8 @@ export default function Create() {
               <option value = "">Select...</option>
               {AIRPORTS.map((x) => <option value={x}>{x}</option>)}
             </select>
+        </td>
+        <td>
           <label htmlFor="to">To:</label>
           <select
             type="text"
@@ -98,17 +116,10 @@ export default function Create() {
               <option value = "">Select...</option>
               {AIRPORTS.map((x) => <option value={x}>{x}</option>)}
             </select>
-          {/* Durration of Flight */}
-          <label htmlFor="flight-durration">Flight Durration (Minutes):</label>
-          <input
-            type="double"
-            placeholder= "0.0"
-            max="24"
-            min="0"
-            className="form-control"
-            id="flight-durration"
-            value={form.flight_duration}
-            onChange={(e) => updateForm({ flight_duration: e.target.value })}/>
+          </td>
+          </tr>
+          <tr>
+          <td>
           {/* Landings */}
           <label htmlFor="day_landing">Day Landings:</label>
           <input
@@ -118,6 +129,8 @@ export default function Create() {
             id="day"
             value={form.landing_day}
             onChange={(e) => updateForm({ landing_day: e.target.value })}/>
+        </td>
+        <td>
           <label htmlFor="night_landing">Night Landings:</label>
           <input
             type="number"
@@ -127,15 +140,13 @@ export default function Create() {
             value={form.landing_night}
             onChange={(e) => updateForm({ landing_night: e.target.value })}/>
             {/*end*/}
-        </div>
-      </div>
+          </td>
+        </tr>
 
       {/* -----------------------------------------------------*/}
-
-      <br/><br/><br/>
+      <tr>
+      <td>
       {/*Pilot Info*/}
-      <div className="form-group"> 
-        <div className="form-check form-check-inline">
           {/* PIC */}
           <label htmlFor="to">PIC:</label>
           <input
@@ -144,6 +155,8 @@ export default function Create() {
             id="pic"
             value={form.pic}
             onChange={(e) => updateForm({ pic: e.target.value })}/>
+        </td>
+        <td>
           {/*SIC*/}
           <label htmlFor="to">SIC:</label>
           <input
@@ -152,16 +165,13 @@ export default function Create() {
             id="sic"
             value={form.sic}
             onChange={(e) => updateForm({ sic: e.target.value })}/>
-        </div>
-      </div>
-
+        </td>
+        </tr>
       {/* -----------------------------------------------------*/}
-
-      <br/><br/><br/>
+        <tr>
+        <td>
       {/*Plane Info*/}
-      <div className="form-group"> 
         {/* Aircraft Type */}
-        <div className="form-check form-check-inline">
           <label htmlFor="aircraft-type">Aircraft Type:</label>
           <input
             type="text"
@@ -169,6 +179,8 @@ export default function Create() {
             id="aircraft-type"
             value={form.aircraft_type}
             onChange={(e) => updateForm({ aircraft_type: e.target.value })}/>
+        </td>
+        <td>
           {/* Aircraft Ident */}
           <label htmlFor="aircraft-id">Aircraft Id:</label>
           <input
@@ -177,11 +189,13 @@ export default function Create() {
             id="aircraft-id"
             value={form.aircraft_id}
             onChange={(e) => updateForm({ aircraft_id: e.target.value })}/>
-        </div>
-      </div>
-      <br/><br/>
+          </td>
+          </tr>
+      </table>
       {/*Notes*/}
-      <div className="form-group"> 
+      <table>
+      <tr>
+        <td>
         <label htmlFor="notes">Notes:</label>
             <input
               type="text"
@@ -189,16 +203,16 @@ export default function Create() {
               id="notes"
               value={form.notes}
               onChange={(e) => updateForm({ notes: e.target.value })}/>
-      </div>
-
-
+      </td>
+      </tr>
+    </table>
     <br/><br/>
     {/*Upload record button*/}
-    <div className="form-group">
+    <div className="buttons-container">
          <input
            type="submit"
            value="Upload Entry"
-           className="btn btn-primary"/>
+           className="upload-button"/>
     </div>
     </form>
   </div>
